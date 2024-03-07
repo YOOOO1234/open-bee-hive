@@ -83,7 +83,7 @@
             button.style.backgroundColor = 'limegreen';
             button.textContent = 'OPEN';
             // Send a request to the specified IP address with message=1
-            fetch('http://192.168.3.45/?message=１')
+            fetch('http://172.18.28.20/?message=１')
                 .then(response => {
                 console.log('Request sent for OPEN state');
                 })
@@ -94,7 +94,7 @@
             button.style.backgroundColor = 'red';
             button.textContent = 'CLOSE';
             // Send a request to the specified IP address with message=0
-            fetch('http://192.168.3.45/?message=０')
+            fetch('http://172.18.28.20/?message=０')
                 .then(response => {
                 console.log('Request sent for CLOSE state');
                 })
