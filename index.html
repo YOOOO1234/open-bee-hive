@@ -77,17 +77,34 @@
         }
 
         document.getElementById('toggleButton').addEventListener('click', function() {
-            isOn = !isOn; // Toggle state
-            const button = document.getElementById('toggleButton');
-            if (isOn) {
-                button.style.backgroundColor = 'limegreen';
-                button.textContent = 'OPEN';
-            } else {
-                button.style.backgroundColor = 'red';
-                button.textContent = 'CLOSE';
-            }
-            createBees();
+        isOn = !isOn; // Toggle state
+        const button = document.getElementById('toggleButton');
+        if (isOn) {
+            button.style.backgroundColor = 'limegreen';
+            button.textContent = 'OPEN';
+            // Send a request to the specified IP address with message=1
+            fetch('http://192.168.3.45/?message=１')
+                .then(response => {
+                console.log('Request sent for OPEN state');
+                })
+                .catch(error => {
+                console.error('Error sending request for OPEN state', error);
+                });
+        } else {
+            button.style.backgroundColor = 'red';
+            button.textContent = 'CLOSE';
+            // Send a request to the specified IP address with message=0
+            fetch('http://192.168.3.45/?message=０')
+                .then(response => {
+                console.log('Request sent for CLOSE state');
+                })
+                .catch(error => {
+                console.error('Error sending request for CLOSE state', error);
+                });
+        }
+        createBees();
         });
+
     </script>
 </body>
 </html>
