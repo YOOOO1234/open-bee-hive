@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bees Animation</title>
+    <style>
+        body {
+            background-image: url('いちご圃場.png'); /* 画像のパスを更新 */
+            background-size: cover; /* 画像が画面全体に表示されるように設定 */
+            background-repeat: no-repeat; /* 画像の繰り返しをなくす */
+            background-position: center center; /* 画像を画面の中央に配置 */
+        }
+        #toggleButton {
+            display: block;
+            width: 200px;
+            height: 50px;
+            margin: 20px auto;
+            font-size: 24px;
+            background-color: red; /* Default OFF state color */
+            color: white;
+        }
+
+        #beeHive {
+            width: 100%; /* or specific size */
+            height: 200px; /* Adjust based on your layout */
+            background-image: url('巣箱open.png'); /* Replace with your beehive image path */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: relative;
+            margin: 20px auto;
+        }
+
+        .bee {
+            width: 50px; /* Adjust based on your image */
+            height: 50px; /* Adjust based on your image */
+            background-image: url('mitsubachi_new.png'); /* Replace with your bee image path */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: absolute;
+            opacity: 1; /* Always visible when created */
+            transition: transform 2s linear; /* Smooth movement */
+        }
+
+        /* ハチが自由に動くためのアニメーション */
+        @keyframes floatAround {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-50px, 50px); }
+            50% { transform: translate(50px, 100px); }
+            75% { transform: translate(-100px, -50px); }
+        }
+    </style>
+</head>
+<body>
+    <button id="toggleButton">CLOSE</button>
+    <div id="beeHive"></div>
+
+    <script>
+        let isOn = false; // Default state is OFF
+
+        function createBees() {
+            const hive = document.getElementById('beeHive');
+            hive.innerHTML = ''; // Clear existing bees
+            if (isOn) {
+                for (let i = 0; i < 10; i++) {
+                    let bee = document.createElement('div');
+                    bee.className = 'bee';
+                    // ハチを巣箱の中心に配置
+                    bee.style.top = '75px'; // Adjust based on hive size and bee size
+                    bee.style.left = '55%';
+                    bee.style.transform = 'translate(-50%, -50%)'; // Center the bee
+                    // ハチが飛び回るアニメーションを追加
+                    bee.style.animation = `floatAround ${5 + i}s infinite linear`;
+                    hive.appendChild(bee);
+                }
+            }
+        }
+
+        document.getElementById('toggleButton').addEventListener('click', function() {
+            isOn = !isOn; // Toggle state
+            const button = document.getElementById('toggleButton');
+            if (isOn) {
+                button.style.backgroundColor = 'limegreen';
+                button.textContent = 'OPEN';
+            } else {
+                button.style.backgroundColor = 'red';
+                button.textContent = 'CLOSE';
+            }
+            createBees();
+        });
+    </script>
+</body>
+</html>
